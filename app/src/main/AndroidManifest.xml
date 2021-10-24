@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SaveItApplication">
         <activity
+            android:name=".Beranda"
+            android:exported="false" />
+        <activity
+            android:name=".TambahPemasukan"
+            android:exported="false" />
+        <activity
+            android:name=".DetailCashFlow"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
