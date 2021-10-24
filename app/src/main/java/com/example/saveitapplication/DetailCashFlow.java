@@ -1,6 +1,7 @@
 package com.example.saveitapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
@@ -15,6 +16,7 @@ public class DetailCashFlow extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
     ArrayList<String> tanggal, nominal, tipe, keterangan;
+    CashFlowAdapter cashFlowAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,12 @@ public class DetailCashFlow extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(DetailCashFlow.this);
         tanggal = new ArrayList<>();
         nominal = new ArrayList<>();
-        tipe = new ArrayList<>();
+        //tipe = new ArrayList<>();
         keterangan = new ArrayList<>();
+
+        cashFlowAdapter = new CashFlowAdapter(DetailCashFlow.this, nominal, tanggal, keterangan);
+        recyclerView.setAdapter(cashFlowAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(DetailCashFlow.this));
 
         storeDataInArrays();
     }
@@ -39,10 +45,10 @@ public class DetailCashFlow extends AppCompatActivity {
         }
         else {
             while (cursor.moveToNext()) {
-                tanggal.add(cursor.getString(0));
-                nominal.add(cursor.getString(1));
-                tipe.add(cursor.getString(2));
-                keterangan.add(cursor.getString(3));
+                tanggal.add(cursor.getString(1));
+                nominal.add(cursor.getString(2));
+                //tipe.add(cursor.getString(2));
+                keterangan.add(cursor.getString(4));
             }
         }
     }

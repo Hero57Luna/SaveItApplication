@@ -11,9 +11,6 @@
         android:theme="@style/Theme.SaveItApplication">
         <activity
             android:name=".DetailCashFlow"
-            android:exported="false" />
-        <activity
-            android:name=".TambahPemasukan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
