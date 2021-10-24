@@ -61,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(" DROP TABLE IF EXISTS " + TABLE_USER);
     }
 
-    void addPemasukan(String tanggal, int nominal, String tipe, String keterangan) {
+    public void addPemasukan(String tanggal, int nominal, String tipe, String keterangan) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -71,6 +71,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_KETERANGAN, keterangan);
 
         long result = db.insert(TABLE_CASH_FLOW, null, cv);
+
+        if (result == -1) {
+            Toast.makeText(context, "Data gagal disimpan", Toast.LENGTH_SHORT).show();
+        }
+
+        else {
+            Toast.makeText(context, "Data berhasil disimpan", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void addUser(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_USERNAME, username);
+        cv.put(COLUMN_PASSWORD, password);
+
+        long result = db.insert(TABLE_USER, null, cv);
 
         if (result == -1) {
             Toast.makeText(context, "Data gagal disimpan", Toast.LENGTH_SHORT).show();
@@ -91,4 +109,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public boolean checkUser(String username, String password) {
+        String[] columns = {COLUMN_ID_USER};
+        SQLiteDatabase db = getReadableDatabase();
+        String selection = COLUMN_USERNAME + "=?" + " AND " + COLUMN_PASSWORD + "=?";
+        String[] selectionArgs = {username, password};
+        Cursor cursor = db.query(TABLE_USER, columns, selection, selectionArgs, null, null, null);
+        int count = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if (count > 0) {
+            return true;
+        }
+
+        else {
+            return false;
+        }
+    }
+
 }
