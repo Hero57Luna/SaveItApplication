@@ -3,6 +3,7 @@ package com.example.saveitapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -77,6 +78,15 @@ public class TambahPemasukan extends AppCompatActivity implements DatePickerDial
                 String nominalString = nominal.getText().toString();
                 int nominalInt = Integer.parseInt(nominalString);
                 databaseHelper.addPemasukan(tanggalText.getText().toString(), nominalInt, "pemasukan", keterangan.getText().toString());
+            }
+        });
+
+        kembali.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TambahPemasukan.this, Beranda.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

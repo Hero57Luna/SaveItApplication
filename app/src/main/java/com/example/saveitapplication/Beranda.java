@@ -18,7 +18,7 @@ public class Beranda extends AppCompatActivity {
         setContentView(R.layout.activity_beranda);
 
         button_pemasukan = findViewById(R.id.button_pemasukan);
-        button_pengeluaran = findViewById(R.id.button_pengeluaran);
+        button_detail = findViewById(R.id.button_detail);
 
         button_pemasukan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +28,7 @@ public class Beranda extends AppCompatActivity {
             }
         });
 
-        button_pengeluaran.setOnClickListener(new View.OnClickListener() {
+        button_detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Beranda.this, DetailCashFlow.class);
